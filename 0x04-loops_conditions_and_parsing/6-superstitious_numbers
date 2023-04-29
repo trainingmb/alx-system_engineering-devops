@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# This script is counting
+count=0
+while [ $count -lt 20 ]
+do
+	case $count in
+
+	4)
+		echo "bad luck from China"
+		;;
+	
+	9)
+		echo "bad luck from Japan"
+		;;
+	17)
+		echo "bad luck from Italy"
+		;;
+	esac
+	echo $((count + 1))
+	count=$(( count + 1))
+done
+
