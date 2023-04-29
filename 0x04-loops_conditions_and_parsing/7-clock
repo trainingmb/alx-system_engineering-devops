@@ -6,7 +6,7 @@ while [ $count -lt 13 ]
 do
 	echo -n "Hour: "
 	echo $count
-	min=0
+	min=1
 	while [ $min -lt 60 ]
 	do
 		echo $min
