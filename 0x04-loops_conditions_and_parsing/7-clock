@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# This script is a clock script
+count=0
+min=0
+while [ $count -lt 13 ]
+do
+	echo -n "Hour: "
+	echo $count
+	min=0
+	while [ $min -lt 60 ]
+	do
+		echo $min
+		min=$(( min + 1))
+	done
+	count=$(( count + 1))
+done
+
