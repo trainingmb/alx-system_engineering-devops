@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#Get the self PID
+
+echo $$
+
