@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# This script simplifier git add commit push
+git add "$1"
+git commit -m "$2"
+git push
+
