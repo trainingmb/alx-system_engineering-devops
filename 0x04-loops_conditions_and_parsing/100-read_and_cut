@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#File etc/password
+filename='/etc/passwd'
+while read p
+do
+    echo $p | cut -d ':' -f1,3,6
+done < "$filename"
+
