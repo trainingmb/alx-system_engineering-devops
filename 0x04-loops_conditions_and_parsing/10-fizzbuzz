@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# This script is the FizzBuzz script
+count=1
+wr="$count"
+while [ $count -lt 101 ]
+do
+	wr="$count"
+	if [ $((count % 3)) == 0 ]
+	then
+		echo -n "Fizz"
+		wr=""
+	fi
+	if [ $((count % 5)) == 0 ]
+	then
+		echo -n "Buzz"
+		wr=""
+	fi
+	echo "$wr"
+	count=$(( count + 1))
+done
+
