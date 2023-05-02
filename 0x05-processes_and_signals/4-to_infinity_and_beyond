@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#Bash script that forever moves to infinity
+
+while true
+do
+	echo "To infinity and beyond"
+	sleep 2
+done
+
