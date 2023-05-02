@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 #Stops by beheading buzz's ride to infinity but with signal
 
-pkill -f -19 7-highlander
+pkill -f -9 7-highlander
