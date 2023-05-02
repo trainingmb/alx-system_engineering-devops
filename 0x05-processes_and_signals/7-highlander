@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#Bash script that forever moves to infinity but
+#with signal
+
+while true
+do
+	trap "echo 'I am invincible!!!'" SIGTERM
+	echo "To infinity and beyond"
+	sleep 2
+done
+
