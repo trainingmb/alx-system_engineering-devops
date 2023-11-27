@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 #Practice with puppet
 
+
 file { '/etc/ssh/ssh_config':
-	ensure => present,
+  ensure  => present,
 content => "
-	#SSH client config
-	Host *
-	   IdentityFile ~/.ssh/school
-	   PasswordAuthenticate no
-	",
+    # SSH client configuration
+    Host *
+      IdentityFile ~/.ssh/school
+      PasswordAuthentication no
+  ",
 }
