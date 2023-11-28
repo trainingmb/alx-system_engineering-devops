@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#Give me a page
+
+echo "ServerName localhost" | sudo tee /etc/apache2/conf-available/fqdn.conf
+sudo service apache2 start
