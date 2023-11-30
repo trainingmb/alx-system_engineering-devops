@@ -328,7 +328,7 @@ sylvain@ubuntu$
 
 
 
- Score:
+
  
 
  
@@ -398,17 +398,6 @@ sylvain@ubuntu$
 
 
 
-
-
- Score:
- 
- 100.0%
- 
- (
- 
- Checks completed: 100.0%
- 
- )
  
 
 
