@@ -2,7 +2,7 @@
 #Give me a page
 
 container=$(sudo docker ps |  grep 'holbertonschool\/265\-0' | cut -d ' ' -f 1)
-conmmands="echo 'ServerName localhost' | sudo tee /etc/apache2/conf-available/fqdn.conf;sudo service apache2 start;"
+commands="echo 'ServerName localhost' | sudo tee /etc/apache2/conf-available/fqdn.conf;sudo service apache2 start;"
 
 
-sudo docker exec -it $container sh -c "$commands"
+sudo docker exec -it "$container" sh -c "$commands"
