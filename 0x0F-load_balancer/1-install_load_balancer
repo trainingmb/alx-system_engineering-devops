@@ -1,28 +1,17 @@
 #!/usr/bin/env bash
-# Custom
+# Install load balancer
+sudo apt-get -y update
+sudo apt-get -y install haproxy
+sudo chown  $USER:$USER /etc/haproxy/haproxy.cfg
 
-apt-get update
-apt-get install -y nginx
-service nginx start
-mkdir /etc/nginx/html
-echo "Hello World!" > /etc/nginx/html/index.html
-echo "Ceci n'est pas une page" > /etc/nginx/html/404.html
-echo "server {
-    listen 80;
-    listen [::]:80 default_server;
-    root   /etc/nginx/html;
-    index  index.html;
-    location /redirect_me {
-        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
-    }
-    error_page 404 /404.html;
-    location = /404.html{
-        root /etc/nginx/html;
-    	internal;
-    
-" > /etc/nginx/sites-available/default
-echo add_header X-Served-By "$HOSTNAME" >> /etc/nginx/sites-available/default
 echo "
-    }
-}" >> /etc/nginx/sites-available/default
-service nginx restart
+frontend estebanweb
+    bind *:80
+    mode http
+    default_backend app
+backend app
+    balance roundrobin
+    server 206031-web-01    54.144.221.209:80 check
+    server 206031-web-02 	34.232.69.26:80 check" >> /etc/haproxy/haproxy.cfg
+
+sudo service haproxy restart
