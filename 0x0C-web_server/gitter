@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+
+git add $1
+if [ ! -z "$2" ]
+  then
+  echo "Commiting with message <$2>"
+  git commit -m "$2"
+else
+  echo "Commiting with message <Adding $1>"
+  git commit -m "Added $1"
+fi
+git push

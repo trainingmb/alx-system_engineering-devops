@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#MKDIR
+
+echo "$0"
+mkdir "$1"
+cd "$1"
+cp ../gitter .
+echo "$2" > README.md
+./gitter README.md
