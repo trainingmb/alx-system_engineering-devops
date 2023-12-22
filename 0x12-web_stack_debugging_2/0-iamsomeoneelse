@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+
+if [ -n "$1" ]
+  then
+	  sudo -H -u "$1" bash -c 'whoami'
+else
+	  whoami
+fi
