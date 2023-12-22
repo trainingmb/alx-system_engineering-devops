@@ -1,6 +1,5 @@
-#!/usr/bin/bash
-
-
+#!/usr/bin/env bash
+#Configered to run whoami as passed argument user
 if [ -n "$1" ]
   then
 	  sudo -H -u "$1" bash -c 'whoami'
