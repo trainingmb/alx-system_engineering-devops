@@ -1,0 +1,102 @@
+# Three Server Web Infrastructure for www.foobar.com
+
+## User Accesses the Website
+
+A user wants to access the website hosted at www.foobar.com.
+
+## Infrastructure Components
+
+### 1. Server 1
+
+- **IP Address:** 10.0.0.1
+- **Components:**
+  - Nginx (Web Server)
+  - Application Server
+  - Application Files (Your Code Base)
+
+### 2. Server 2
+
+- **IP Address:** 10.0.0.2
+- **Components:**
+  - Nginx (Web Server)
+  - Application Server
+  - Application Files (Your Code Base)
+
+### 3. Load Balancer (HAproxy)
+
+- **IP Address:** 10.0.0.3
+- **Distribution Algorithm:**
+  - Round Robin
+- **Active-Active Setup:**
+  - Both Server 1 and Server 2 actively handle incoming requests.
+  - Enhances performance and availability.
+
+### 4. Database (MySQL) - Primary-Replica Cluster
+
+#### Primary Node (Master)
+
+- **IP Address:** 10.0.0.4
+- **Role:**
+  - Handles write operations (insert, update, delete).
+  - Serves as the authoritative source for data.
+- **Connection from Application:**
+  - The application writes data directly to the Primary Node.
+
+#### Replica Node (Slave)
+
+- **IP Address:** 10.0.0.5
+- **Role:**
+  - Handles read operations.
+  - Replicates data from the Primary Node for redundancy.
+- **Connection from Application:**
+  - The application reads data from either the Primary or Replica Node.
+
+## Additional Elements and Explanations
+
+### 1. Load Balancer (HAproxy)
+
+- **Why:** 
+  - Distributes incoming traffic evenly across multiple servers, preventing overloading.
+  - Enhances fault tolerance and availability.
+- **Distribution Algorithm:**
+  - Round Robin: Routes each new request to the next server in line, distributing the load evenly.
+
+- **Active-Active vs. Active-Passive:**
+  - Active-Active: Both servers actively handle requests, promoting load balancing and better resource utilization.
+  - Active-Passive: Only one server handles requests actively, while the other serves as a backup. It provides failover in case of the active server's failure.
+
+### 2. Database (MySQL) - Primary-Replica Cluster
+
+- **Why:**
+  - Provides data redundancy and improves fault tolerance.
+  - Allows for parallel read operations on the Replica Nodes, enhancing performance.
+  
+- **Primary Node vs. Replica Node:**
+  - The Primary Node handles write operations, ensuring data consistency and integrity.
+  - Replica Nodes replicate data from the Primary Node, serving read operations and providing fault tolerance.
+
+## Issues with the Infrastructure
+
+### 1. Single Points of Failure (SPOF)
+
+- **Potential SPOFs:**
+  - Load Balancer (HAproxy) and Database Primary Node (Master) can be SPOFs.
+- **Mitigation:**
+  - Implement redundancy and failover mechanisms for the Load Balancer and Database to avoid single points of failure.
+
+### 2. Security Issues
+
+- **Issues:**
+  - No firewall mentioned.
+  - Lack of HTTPS.
+- **Mitigation:**
+  - Implement firewalls on servers to control incoming and outgoing traffic.
+  - Enable HTTPS to encrypt data in transit, ensuring secure communication.
+
+### 3. No Monitoring
+
+- **Issues:**
+  - Lack of monitoring tools.
+- **Mitigation:**
+  - Implement monitoring tools to track server performance, detect issues, and facilitate proactive maintenance.
+
