@@ -42,5 +42,5 @@ if __name__ == '__main__':
                   len([x for x in usr_todos if x.get("completed")]),
                   len(usr_todos)))
             for i in usr_todos:
-                if i.get("completed") == False:
+                if i.get("completed") is False:
                     print("\t {}".format(i.get("title")))
