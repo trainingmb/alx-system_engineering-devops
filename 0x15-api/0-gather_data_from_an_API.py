@@ -35,8 +35,9 @@ if __name__ == '__main__':
         if usr.get("name", None) is not None:
             usr_todos = get_todos(sys.argv[1])
             print("Employee {} is done with tasks({}/{}):".format(
-                  usr.get("ame"),
+                  usr.get("name"),
                   len([x for x in usr_todos if x.get("completed")]),
                   len(usr_todos)))
             for i in usr_todos:
-                print("\t {}".format(i.get("title")))
+                if i.get("completed") == False:
+                    print("\t {}".format(i.get("title")))
