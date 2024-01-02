@@ -22,15 +22,21 @@ def get_todos(usr_id=None):
     """
     url = "https://jsonplaceholder.typicode.com/todos"
     response = requests.get(url)
-    if usr_id == None:
+    if usr_id is None:
         return response.json()
-    print(response.json())
     filteredlist = [x for x in response.json()
                     if str(x.get("userId", None)) == usr_id]
     return filteredlist
 
+
 if __name__ == '__main__':
     if len(sys.argv) > 1:
-        print(sys.argv[1])
-        print(get_user_info(sys.argv[1]))
-        print(get_todos(sys.argv[1]))
+        usr = get_user_info(sys.argv[1])
+        if usr.get("name", None) is not None:
+            usr_todos = get_todos(sys.argv[1])
+            print("Employee {} is done with tasks({}/{}):".format(
+                  usr.get("ame"),
+                  len([x for x in usr_todos if x.get("completed")]),
+                  len(usr_todos)))
+            for i in usr_todos:
+                print("\t {}".format(i.get("title")))
