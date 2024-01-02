@@ -51,7 +51,7 @@ if __name__ == '__main__':
             data = []
             for i in usr_todos:
                 row = [usr.get("id"),
-                       usr.get("name"),
+                       usr.get("username"),
                        str(i.get("completed")),
                        i.get("title")]
                 data.append(row)
