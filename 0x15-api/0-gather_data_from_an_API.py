@@ -26,7 +26,7 @@ def get_todos(usr_id=None):
         return response.json()
     print(response.json())
     filteredlist = [x for x in response.json()
-                    if str(x.get("userId", Non)e) == usr_id]
+                    if str(x.get("userId", None)) == usr_id]
     return filteredlist
 
 if __name__ == '__main__':
