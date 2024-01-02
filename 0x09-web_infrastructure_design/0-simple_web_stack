@@ -1,0 +1,49 @@
+
+- **www Record in www.foobar.com:**
+  - The www DNS record is a CNAME (Canonical Name) record pointing to foobar.com.
+  - It serves as an alias for the domain foobar.com, directing traffic to the same IP.
+
+### 4. Web Server (Nginx)
+
+- **Role:**
+  - Serves as the entry point for incoming HTTP requests.
+  - Handles static content delivery.
+  - Manages SSL termination if needed.
+  
+### 5. Application Server
+
+- **Role:**
+  - Executes the application code.
+  - Handles dynamic content generation.
+  - Interfaces between the web server and application code.
+
+### 6. Database (MySQL)
+
+- **Role:**
+  - Stores and manages data used by the application.
+  - Allows for data retrieval and storage operations.
+
+### 7. Communication with User's Computer
+
+- **Protocol:**
+  - HTTP/HTTPS for communication between the user's browser and the Nginx web server.
+
+## Issues with the Infrastructure
+
+### 1. Single Point of Failure (SPOF)
+
+- **Problem:**
+  - The entire infrastructure relies on a single server (8.8.8.8).
+  - If the server fails, the entire website becomes unavailable.
+
+### 2. Downtime during Maintenance
+
+- **Problem:**
+  - Any maintenance requiring a web server restart will result in downtime.
+  - Users won't be able to access the website during this period.
+
+### 3. Scalability Challenges
+
+- **Problem:**
+  - The current setup may struggle to handle a significant increase in incoming traffic.
+  - Scaling options, such as load balancing and multiple servers, are not considered in this basic infrastructure.

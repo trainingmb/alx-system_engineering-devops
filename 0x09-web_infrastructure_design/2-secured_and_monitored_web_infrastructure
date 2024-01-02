@@ -1,0 +1,65 @@
+Whiteboard Design:
+
+Server 1 (Web Server):
+
+Components:
+Nginx (Web Server)
+Application Server
+Firewall 1
+Monitoring Client 1 (for Sumo Logic or other monitoring services)
+Role:
+Handles incoming HTTP/HTTPS requests.
+Serves static content and forwards dynamic requests to the application server.
+Server 2 (Application Server):
+
+Components:
+Application Server
+Firewall 2
+Monitoring Client 2 (for Sumo Logic or other monitoring services)
+Role:
+Executes the application code.
+Communicates with the web server and database server.
+Server 3 (Database Server):
+
+Components:
+MySQL (Database)
+Firewall 3
+Monitoring Client 3 (for Sumo Logic or other monitoring services)
+Role:
+Stores and manages data used by the application.
+Handles database read and write operations.
+Load Balancer (LB):
+
+Components:
+SSL Certificate (for serving www.foobar.com over HTTPS)
+Role:
+Distributes incoming traffic across multiple servers.
+Terminates SSL, decrypting HTTPS traffic before forwarding it to the web server.
+Explanation:
+
+Firewalls:
+
+Why: Firewalls are added to control incoming and outgoing traffic, enhancing security by filtering and blocking unauthorized access.
+SSL Certificate:
+
+Why: Serving traffic over HTTPS encrypts data in transit, providing a secure and private connection between the user's browser and the web server. It helps protect sensitive information such as login credentials and personal data.
+Monitoring Clients:
+
+Why: Monitoring is crucial for maintaining system health, identifying issues, and ensuring optimal performance. Monitoring clients collect and send data to a monitoring service like Sumo Logic, allowing real-time analysis and proactive troubleshooting.
+Monitoring Data Collection:
+
+How: Monitoring tools collect data through agents or clients installed on each server. These agents regularly send performance metrics, logs, and other relevant data to the monitoring service, which then provides insights into the system's health.
+Monitoring Web Server QPS:
+
+What to do: To monitor the web server's QPS (Queries Per Second), configure the monitoring tool to track the incoming HTTP requests or transactions. Set up alerts to notify administrators if the QPS exceeds or falls below predefined thresholds.
+Issues with the Infrastructure:
+
+Terminating SSL at the Load Balancer Level:
+
+Why it's an Issue: If SSL termination happens at the load balancer, the traffic between the load balancer and web server is unencrypted. This creates a potential security risk if the internal network is compromised.
+Single MySQL Server Capable of Accepting Writes:
+
+Why it's an Issue: Having a single point of failure for write operations in the database can lead to downtime and data inconsistency. If the MySQL server goes down, write operations cannot be processed.
+Identical Components on Servers:
+
+Why it might be a Problem: If all servers have the same components and configurations, a single issue affecting one server (e.g., a software bug or misconfiguration) may propagate across all servers, leading to widespread downtime or performance issues. It's advisable to introduce diversity and redundancy in the infrastructure for resilience.
