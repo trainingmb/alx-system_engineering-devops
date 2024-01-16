@@ -7,12 +7,11 @@ import requests
 
 def top_ten(subreddit):
     """
-    Quearies Reddit API and prints the titles of
+    Queries Reddit API and prints the titles of
     the first 10 hot posts listed in the given subreddit
     """
     headers = {'User-Agent': 'Hot Top ten /Reddit'}
-    payload = {'count': '0',
-               'limit': '9'}
+    payload = {'limit':10}
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     response = requests.get(url, headers=headers, allow_redirects=False,
                             params=payload)
@@ -20,6 +19,8 @@ def top_ten(subreddit):
        response.headers.get('content-type', ''):
         data = response.json()['data']['children']
         for child in data:
-            print(child.get('data', {}).get('title'))
+            if not child.get('data', {}).get('locked',True) and \
+                not child.get('data', {}).get('stickied',True):
+                print(child.get('data', {}).get('title'))
     else:
         print(None)
