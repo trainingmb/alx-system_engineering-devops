@@ -32,12 +32,13 @@ def recurse(subreddit, hot_list={}):
             title_list.append(child.get('data', {}).get('title'))
         if len(title_list) == 0:
             return None
-        else:
+        elif response_json['data']['after'] is not None:
             rec_title_list = recurse(subreddit,
                                      {'after': response_json['data']['after'],
-                                      'count': response_json['data']['dist']})
+                                      'count': response_json['data']['dist'] +
+                                               payload['count']})
             if rec_title_list is not None:
                 title_list = title_list + rec_title_list
-            return title_list
+        return title_list
     else:
         return None
