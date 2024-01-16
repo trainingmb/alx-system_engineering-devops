@@ -19,7 +19,7 @@ def top_ten(subreddit):
     if 'application/json' in \
        response.headers.get('content-type', ''):
         data = response.json()['data']['children']
-        for child in data:
+        for child in [data[i] for i in range(10)]:
             print(child.get('data', {}).get('title'))
     else:
         print(None)
