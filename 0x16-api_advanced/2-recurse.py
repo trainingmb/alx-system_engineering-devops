@@ -21,7 +21,6 @@ def recurse(subreddit, hot_list={}):
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     response = requests.get(url, headers=headers, allow_redirects=False,
                             params=payload)
-    
     if 'application/json' in \
        response.headers.get('content-type', ''):
         response_json = response.json()
@@ -35,7 +34,7 @@ def recurse(subreddit, hot_list={}):
             rec_title_list = recurse(subreddit,
                                      {'after': response_json['data']['after'],
                                       'count': response_json['data']['dist'] +
-                                               payload['count']})
+                                      payload['count']})
             if rec_title_list is not None:
                 title_list = title_list + rec_title_list
         return title_list
