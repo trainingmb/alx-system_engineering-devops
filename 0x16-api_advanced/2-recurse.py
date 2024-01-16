@@ -1,26 +1,43 @@
 #!/usr/bin/python3
 """
-1. Top Ten
+2. Recurse it!
 """
 import requests
 
 
-def top_ten(subreddit):
+def recurse(subreddit, hot_list={})
     """
-    Queries Reddit API and prints the titles of
-    the first 10 hot posts listed in the given subreddit
+    Queries Reddit API returns a list containing
+    the titles of all hot articles for a given
+    subreddit.
+    If no results are found for the given subreddit,
+    the function should return None
     """
-    headers = {'User-Agent': 'Hot Top ten /Reddit'}
-    payload = {'limit':10}
+    headers = {'User-Agent': 'Recursive hot list /Reddit'}
+    payload = {'count': 0}
+    if 'after' in hot_list.keys():
+        payload['after'] = hot_list['after']
+        payload['count'] = hot_list['count']
+        print(payload)
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     response = requests.get(url, headers=headers, allow_redirects=False,
                             params=payload)
+    
     if 'application/json' in \
        response.headers.get('content-type', ''):
-        data = response.json()['data']['children']
+        response_json = response.json()
+        data = response_json['data']['children']
+        title_list = []
         for child in data:
-            if not child.get('data', {}).get('locked',True) and \
-                not child.get('data', {}).get('stickied',True):
-                print(child.get('data', {}).get('title'))
+            title_list.append(child.get('data', {}).get('title'))
+        if len(title_list) == 0:
+            return None
+        else:
+            rec_title_list = recurse(subreddit,
+                                     {'after': response_json['data']['after'],
+                                      'count': response_json['data']['dist']})
+            if rec_title_list is not None:
+                title_list = title_list + rec_title_list
+            return title_list
     else:
         print(None)
