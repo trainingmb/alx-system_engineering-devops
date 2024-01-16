@@ -13,7 +13,7 @@ def top_ten(subreddit):
     headers = {'User-Agent': 'Hot Top ten /Reddit'}
     payload = {'count': '10',
                'limit': '25'}
-    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
+    url = "https://www.reddit.com/r/{}/top.json".format(subreddit)
     response = requests.get(url, headers=headers, allow_redirects=False,
                             params=payload)
     if 'application/json' in \
