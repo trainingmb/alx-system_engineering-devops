@@ -64,5 +64,5 @@ def count_words(subreddit, word_list):
             o = re.findall(searches[i], title)
             results[word_list[i]] += len(o)
     for key, value in results.items():
-        print("{}: {}".format(key, value)
+        print("{}: {}".format(key, value))
     
