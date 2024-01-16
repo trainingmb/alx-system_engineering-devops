@@ -54,8 +54,8 @@ def count_words(subreddit, word_list):
     if title_list is None:
         return None
     search_pattern = r'(?:(?<=^)|(?<=\s))({})(?=\s|$)'
-    word_list = [i.lower()  for i in word_list]
-    searches = [search_pattern.format(i)  for i in word_list]
+    word_list = [i.lower() for i in word_list]
+    searches = [search_pattern.format(i) for i in word_list]
     results = {}
     for i in word_list:
         results[i] = 0
@@ -65,7 +65,7 @@ def count_words(subreddit, word_list):
             results[word_list[i]] += len(o)
     results_sorted = sorted(results.items(),
                             key=lambda x: x[1],
-                            reverse=True) 
+                            reverse=True)
     for key, value in results_sorted:
         print("{}: {}".format(key, value))
     return (title_list, results)
