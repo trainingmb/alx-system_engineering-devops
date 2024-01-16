@@ -11,15 +11,15 @@ def top_ten(subreddit):
     the first 10 hot posts listed in the given subreddit
     """
     headers = {'User-Agent': 'Hot Top ten /Reddit'}
-    payload = {'count': '10',
-               'limit': '25'}
-    url = "https://www.reddit.com/r/{}/top.json".format(subreddit)
+    payload = {'count': '0',
+               'limit': '9'}
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     response = requests.get(url, headers=headers, allow_redirects=False,
                             params=payload)
     if 'application/json' in \
        response.headers.get('content-type', ''):
         data = response.json()['data']['children']
-        for child in [data[i] for i in range(10)]:
+        for child in data:
             print(child.get('data', {}).get('title'))
     else:
         print(None)
