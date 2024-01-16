@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 """
-2. Recurse it!
+3. Count it!
 """
 import requests
+import re
 
 
 def recurse(subreddit, hot_list={}):
@@ -27,7 +28,7 @@ def recurse(subreddit, hot_list={}):
         data = response_json['data']['children']
         title_list = []
         for child in data:
-            title_list.append(child.get('data', {}).get('title'))
+            title_list.append(child.get('data', {}).get('title').lower())
         if len(title_list) == 0:
             return None
         elif response_json['data']['after'] is not None:
@@ -40,3 +41,28 @@ def recurse(subreddit, hot_list={}):
         return title_list
     else:
         return None
+
+
+def count_words(subreddit, word_list):
+    """
+    Queries the Reddit API, parses the title of all hot articles,
+    and prints a sorted count of given keywords (case-insensitive,
+    delimited by spaces. Javascript should count as javascript, but
+    java should not).
+    """
+    title_list = recurse(subreddit)
+    if title_list is None:
+        return None
+    search_pattern = r'(?:(?<=^)|(?<=\s))({})(?=\s|$)'
+    word_list = [i.lower()  for i in word_list]
+    searches = [search_pattern.format(i)  for i in word_list]
+    results = {}
+    for i in word_list:
+        results[i] = 0
+    for title in title_list:
+        for i in range(len(searches)):
+            o = re.findall(searches[i], title)
+            results[word_list[i]] += len(o)
+    for key, value in results.items():
+        print("{}: {}".format(key, value)
+    
