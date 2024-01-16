@@ -19,6 +19,8 @@ def top_ten(subreddit):
        response.headers.get('content-type', ''):
         data = response.json()['data']['children']
         for child in data:
-            print(child.get('data', {}).get('title'))
+            if not child.get('data', {}).get('locked', True) and \
+               not child.get('data', {}).get('stickied', True):
+                print(child.get('data', {}).get('title'))
     else:
         print(None)
