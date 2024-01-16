@@ -14,7 +14,7 @@ def number_of_subscribers(subreddit):
     headers = {'User-Agent': 'About Page : SubscriberCount /Reddit'}
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
     response = requests.get(url, headers=headers)
-    if response.headers.get('content-type', '') == \
-       'application/json':
+    if 'application/json' in \
+       response.headers.get('content-type', ''):
         return response.json()['data'].get("subscribers", 0)
     return 0
