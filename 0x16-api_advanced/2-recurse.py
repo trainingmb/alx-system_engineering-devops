@@ -40,4 +40,4 @@ def recurse(subreddit, hot_list={})
                 title_list = title_list + rec_title_list
             return title_list
     else:
-        print(None)
+        return None
