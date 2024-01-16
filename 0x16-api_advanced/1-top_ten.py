@@ -20,6 +20,6 @@ def top_ten(subreddit):
        response.headers.get('content-type', ''):
         data = response.json()['data']['children']
         for child in data:
-            print(child.get('data',{}).get('title'))
+            print(child.get('data', {}).get('title'))
     else:
         print(None)
